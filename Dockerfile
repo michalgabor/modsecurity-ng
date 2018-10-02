@@ -67,7 +67,7 @@ RUN /cleanup.sh && rm -f /cleanup.sh
 #   installations with very high security requirements. Running PL4 will
 #   likely produce a very high number of FPs which have to be
 #   treated before the site can go productive.
-ENV PARANOIA=3
+ENV PARANOIA=2
 
 # Possible values: On, Off, DetectionOnly
 ENV SEC_RULE_ENGINE=On
