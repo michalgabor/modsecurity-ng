@@ -42,9 +42,9 @@ RUN chmod u+x /*.sh
 COPY nginx.conf /etc/nginx/
 
 # Logs to stdout/stderr
-RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-  ln -sf /dev/stderr /var/log/nginx/error.log && \
-  ln -sf /dev/stdout /var/log/modsec_audit.log
+#RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+#  ln -sf /dev/stderr /var/log/nginx/error.log && \
+#  ln -sf /dev/stdout /var/log/modsec_audit.log
 
 RUN /cleanup.sh && rm -f /cleanup.sh
 
