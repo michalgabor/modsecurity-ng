@@ -11,9 +11,14 @@ WORKDIR /etc/nginx/modsecurity.d
 # Checking out by git sha to get version 3.0.2 of CRS
 # See https://github.com/SpiderLabs/owasp-modsecurity-crs/releases/tag/v3.0.2
 RUN \
-  git clone -b v3.0/master --single-branch https://github.com/SpiderLabs/owasp-modsecurity-crs owasp-crs && \
+  #git clone -b v3.0/master --single-branch https://github.com/SpiderLabs/owasp-modsecurity-crs owasp-crs && \
+  #cd owasp-crs && \
+  #git checkout e4e0497be4d598cce0e0a8fef20d1f1e5578c8d0 && \
+  #rm -rf .git util/regression-tests
+  
+  git clone -b v3.1/dev --single-branch https://github.com/SpiderLabs/owasp-modsecurity-crs owasp-crs && \
   cd owasp-crs && \
-  git checkout e4e0497be4d598cce0e0a8fef20d1f1e5578c8d0 && \
+  git checkout 7c822ccdd86a648e504d79ca1546353be3ca2b4e && \
   rm -rf .git util/regression-tests
 
 RUN \
