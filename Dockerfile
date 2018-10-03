@@ -1,5 +1,4 @@
-#FROM owasp/modsecurity:v3-ubuntu-nginx
-FROM owasp/modsecurity:v2-ubuntu-nginx
+FROM owasp/modsecurity:v3-ubuntu-nginx
 
 ENV CRS_PATH=/etc/nginx/modsecurity.d/owasp-crs
 
@@ -31,10 +30,10 @@ RUN \
 SHELL ["/bin/bash", "-c"]
 
 # REQUEST-903 is Drupal and Wordpress specific
-#RUN \
-#  sed -i -e 's/SecRuleEngine DetectionOnly/SecRuleEngine On/g' modsecurity.conf && \
-#  printf "\ninclude owasp-crs/crs-setup.conf\n" >> include.conf && \
-#  for i in `ls -v owasp-crs/rules/*.conf`; do if [[ $i != *"REQUEST-903"* ]]; then printf "include $i\n" >> include.conf; fi done;
+RUN \
+  sed -i -e 's/SecRuleEngine DetectionOnly/SecRuleEngine On/g' modsecurity.conf && \
+  printf "\ninclude owasp-crs/crs-setup.conf\n" >> include.conf && \
+  for i in `ls -v owasp-crs/rules/*.conf`; do if [[ $i != *"REQUEST-903"* ]]; then printf "include $i\n" >> include.conf; fi done;
 
 COPY *.sh /
 RUN chmod u+x /*.sh
@@ -42,9 +41,9 @@ RUN chmod u+x /*.sh
 COPY nginx.conf /etc/nginx/
 
 # Logs to stdout/stderr
-#RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-#  ln -sf /dev/stderr /var/log/nginx/error.log && \
-#  ln -sf /dev/stdout /var/log/modsec_audit.log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+  ln -sf /dev/stderr /var/log/nginx/error.log && \
+  ln -sf /dev/stdout /var/log/modsec_audit.log
 
 RUN /cleanup.sh && rm -f /cleanup.sh
 
