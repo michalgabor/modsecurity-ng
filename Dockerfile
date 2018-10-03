@@ -31,10 +31,10 @@ RUN \
 SHELL ["/bin/bash", "-c"]
 
 # REQUEST-903 is Drupal and Wordpress specific
-RUN \
-  sed -i -e 's/SecRuleEngine DetectionOnly/SecRuleEngine On/g' modsecurity.conf && \
-  printf "\ninclude owasp-crs/crs-setup.conf\n" >> include.conf && \
-  for i in `ls -v owasp-crs/rules/*.conf`; do if [[ $i != *"REQUEST-903"* ]]; then printf "include $i\n" >> include.conf; fi done;
+#RUN \
+#  sed -i -e 's/SecRuleEngine DetectionOnly/SecRuleEngine On/g' modsecurity.conf && \
+#  printf "\ninclude owasp-crs/crs-setup.conf\n" >> include.conf && \
+#  for i in `ls -v owasp-crs/rules/*.conf`; do if [[ $i != *"REQUEST-903"* ]]; then printf "include $i\n" >> include.conf; fi done;
 
 COPY *.sh /
 RUN chmod u+x /*.sh
