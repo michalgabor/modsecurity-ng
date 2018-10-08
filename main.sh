@@ -46,6 +46,11 @@ if [ "${CONFIG1}" != "" ]; then
   sed -i -e "s,#___CONFIG1___,$CONFIG1,g" /etc/nginx/nginx.conf
 fi
 
+if [ "${CONFIG2}" != "" ]; then
+  echo "Adding custom config $CONFIG2 to the NGINX config"
+  sed -i -e "s,#___CONFIG2___,$CONFIG2,g" /etc/nginx/nginx.conf
+fi
+
 if [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "Off" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "OFF" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "No" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "NO" ]; then
   sed -i "s,add_header X-Frame-Options SAMEORIGIN;$,add_header X-Frame-Options ${PROXY_HEADER_X_FRAME_OPTIONS};,g" /etc/nginx/nginx.conf
   echo "X-Frame-Options set to '${PROXY_HEADER_X_FRAME_OPTIONS}'"
