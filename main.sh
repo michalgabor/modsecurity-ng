@@ -30,6 +30,11 @@ if [ "${SEC_REQUEST_BODY_LIMIT}" != "" ]; then
   echo "SecRequestBodyLimit set to '${SEC_REQUEST_BODY_LIMIT}'"
 fi
 
+if [ "${SEC_AUDIT_LOG}" != "" ]; then
+  sed -i".bak" "s/SecAuditLogParts.*/SecAuditLogParts ${SEC_AUDIT_LOG}/" /etc/nginx/modsecurity.d/modsecurity.conf
+  echo "SecAuditLogParts set to '${SEC_AUDIT_LOG}'"
+fi
+
 if [ "${PROXY_UPSTREAM_HOST}" != "" ]; then
   sed -i -e "s,___PROXY_UPSTREAM_HOST___,$PROXY_UPSTREAM_HOST,g" /etc/nginx/nginx.conf
   #sed -i "s/127.0.0.1:3000/${PROXY_UPSTREAM_HOST}/g" /etc/nginx/nginx.conf
