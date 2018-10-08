@@ -64,5 +64,14 @@ if [ "$names" != "" ]; then
   cat /etc/nginx/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf
 fi
 
+#custom config crs-setup.conf
+names=`env | grep CUSTOM_CONFIG_ | sed 's/=.*//'`
+if [ "$names" != "" ]; then
+  while read name; do
+    eval value='$'"${name}"
+    grep -q -F "${value}" /etc/nginx/modsecurity.d/owasp-crs/crs-setup.conf || echo "${value}" >> /etc/nginx/modsecurity.d/owasp-crs/crs-setup.conf
+  done <<< "$names"
+fi
+
 echo "Starting nginx"
 exec "$@"
