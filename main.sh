@@ -16,13 +16,18 @@ if [ "${SEC_RULE_ENGINE}" != "" ]; then
 fi
 
 if [ "${SEC_PRCE_MATCH_LIMIT}" != "" ]; then
-  sed -i".bak" "s/SecPcreMatchLimit 1000/SecPcreMatchLimit ${SEC_PRCE_MATCH_LIMIT}/" /etc/nginx/modsecurity.d/modsecurity.conf
+  sed -i".bak" "s/SecPcreMatchLimit 1000.*/SecPcreMatchLimit ${SEC_PRCE_MATCH_LIMIT}/" /etc/nginx/modsecurity.d/modsecurity.conf
   echo "SecPcreMatchLimit set to '${SEC_PRCE_MATCH_LIMIT}'"
 fi
 
 if [ "${SEC_PRCE_MATCH_LIMIT_RECURSION}" != "" ]; then
-  sed -i".bak" "s/SecPcreMatchLimitRecursion 1000/SecPcreMatchLimitRecursion ${SEC_PRCE_MATCH_LIMIT_RECURSION}/" /etc/nginx/modsecurity.d/modsecurity.conf
+  sed -i".bak" "s/SecPcreMatchLimitRecursion 1000.*/SecPcreMatchLimitRecursion ${SEC_PRCE_MATCH_LIMIT_RECURSION}/" /etc/nginx/modsecurity.d/modsecurity.conf
   echo "SecPcreMatchLimitRecursion set to '${SEC_PRCE_MATCH_LIMIT_RECURSION}'"
+fi
+
+if [ "${SEC_REQUEST_BODY_LIMIT}" != "" ]; then
+  sed -i".bak" "s/SecRequestBodyLimit.*/SecRequestBodyLimit ${SEC_REQUEST_BODY_LIMIT}/" /etc/nginx/modsecurity.d/modsecurity.conf
+  echo "SecRequestBodyLimit set to '${SEC_REQUEST_BODY_LIMIT}'"
 fi
 
 if [ "${PROXY_UPSTREAM_HOST}" != "" ]; then
