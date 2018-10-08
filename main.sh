@@ -26,8 +26,14 @@ if [ "${SEC_PRCE_MATCH_LIMIT_RECURSION}" != "" ]; then
 fi
 
 if [ "${PROXY_UPSTREAM_HOST}" != "" ]; then
-  sed -i "s/127.0.0.1:3000/${PROXY_UPSTREAM_HOST}/g" /etc/nginx/nginx.conf
+  sed -i -e "s,___PROXY_UPSTREAM_HOST___,$PROXY_UPSTREAM_HOST,g" /etc/nginx/nginx.conf
+  #sed -i "s/127.0.0.1:3000/${PROXY_UPSTREAM_HOST}/g" /etc/nginx/nginx.conf
   echo "Upstream host set to '${PROXY_UPSTREAM_HOST}'"
+fi
+
+if [ "${CONFIG1}" != "" ]; then
+  echo "Adding custom config $CONFIG1 to the NGINX config"
+  sed -i -e "s,#___CONFIG1___,$CONFIG1,g" /etc/nginx/nginx.conf
 fi
 
 if [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "Off" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "OFF" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "No" ] && [ "${PROXY_HEADER_X_FRAME_OPTIONS}" != "NO" ]; then
