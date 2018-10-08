@@ -84,8 +84,8 @@ ENV SEC_RULE_ENGINE=On
 # The PCRE Match limit is meant to reduce the chance for a DoS attack via
 # Regular Expressions. So by raising the limit you raise your vulnerability in this regard,
 # but the PCRE errors are much worse from a security perspective. I run with 500K in prod usually.
-ENV SEC_PRCE_MATCH_LIMIT=500000
-ENV SEC_PRCE_MATCH_LIMIT_RECURSION=500000
+ENV SEC_PRCE_MATCH_LIMIT=1000000
+ENV SEC_PRCE_MATCH_LIMIT_RECURSION=1000000
 
 # Keycloak proxy most probably in our case, hence port 3000
 ENV PROXY_UPSTREAM_HOST=localhost:3000
@@ -93,7 +93,7 @@ ENV PROXY_UPSTREAM_HOST=localhost:3000
 # Avoid clickjacking attacks, by ensuring that content is not embedded into other sites.
 # Possible values: DENY, SAMEORIGIN, ALLOW-FROM https://example.com/
 # Remove this header with values: Off, No or an empty string
-ENV PROXY_HEADER_X_FRAME_OPTIONS=SAMEORIGIN
+#ENV PROXY_HEADER_X_FRAME_OPTIONS=SAMEORIGIN
 
 EXPOSE 80
 
