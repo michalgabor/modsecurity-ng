@@ -30,6 +30,11 @@ if [ "${SEC_REQUEST_BODY_LIMIT}" != "" ]; then
   echo "SecRequestBodyLimit set to '${SEC_REQUEST_BODY_LIMIT}'"
 fi
 
+if [ "${SEC_REQUEST_BODY_NOFILE_LIMIT}" != "" ]; then
+  sed -i".bak" "s/SecRequestBodyNoFilesLimit.*/SecRequestBodyNoFilesLimit ${SEC_REQUEST_BODY_NOFILE_LIMIT}/" /etc/nginx/modsecurity.d/modsecurity.conf
+  echo "SecRequestBodyNoFilesLimit set to '${SEC_REQUEST_BODY_NOFILE_LIMIT}'"
+fi
+
 if [ "${SEC_AUDIT_LOG}" != "" ]; then
   sed -i".bak" "s/SecAuditLogParts.*/SecAuditLogParts ${SEC_AUDIT_LOG}/" /etc/nginx/modsecurity.d/modsecurity.conf
   echo "SecAuditLogParts set to '${SEC_AUDIT_LOG}'"
