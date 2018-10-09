@@ -86,6 +86,8 @@ ENV SEC_RULE_ENGINE=On
 # but the PCRE errors are much worse from a security perspective. I run with 500K in prod usually.
 ENV SEC_PRCE_MATCH_LIMIT=1000000
 ENV SEC_PRCE_MATCH_LIMIT_RECURSION=1000000
+ENV SEC_REQUEST_BODY_LIMIT=52428800
+ENV SEC_REQUEST_BODY_NOFILE_LIMIT=1048576
 
 # Keycloak proxy most probably in our case, hence port 3000
 ENV PROXY_UPSTREAM_HOST=localhost:3000
